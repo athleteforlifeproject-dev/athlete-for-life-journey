@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Happens When You Commit | Athlete For Life</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ExerciseGym",
+  "name": "Athlete for Life Project",
+  "description": "Online strength and performance coaching for former athletes ready to reclaim their athletic identity. Individualized 1:1 programming, real-time coaching, and performance testing, not generic workout plans.",
+  "url": "TODO: your live site URL",
+  "areaServed": {
+    "@type": "Country",
+    "name": "United States"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Cary",
+    "addressRegion": "IL",
+    "addressCountry": "US"
+  },
+  "founder": {
+    "@type": "Person",
+    "name": "Zac Beachler",
+    "jobTitle": "Founder & Coach",
+    "description": "Physical education teacher and personal trainer with 15+ years across K-12 education, club and collegiate coaching, and sports performance. Holds an Illinois Professional Educator License (Physical Education and Health), ACE Sports Performance certification, and ISSA Personal Trainer certification.",
+    "hasCredential": [
+      {
+        "@type": "EducationalOccupationalCredential",
+        "name": "Illinois Professional Educator License (PE & Health)"
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        "name": "ACE Sports Performance Certification"
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        "name": "ISSA Personal Trainer Certification"
+      }
+    ]
+  },
+  "makesOffer": [
+    {
+      "@type": "Offer",
+      "name": "Athletic Re-Entry Program",
+      "description": "12-week individualized 1:1 online coaching program including baseline testing, custom programming, biweekly coaching calls, and progress retesting.",
+      "price": "379.00",
+      "priceCurrency": "USD",
+      "priceSpecification": {
+        "@type": "UnitPriceSpecification",
+        "price": "379.00",
+        "priceCurrency": "USD",
+        "unitText": "MONTH"
+      }
+    },
+    {
+      "@type": "Offer",
+      "name": "Comeback Test Assessment",
+      "description": "One-time baseline performance assessment across agility, power, isometric strength, and aerobic capacity. Credits toward first month of coaching.",
+      "price": "99.00",
+      "priceCurrency": "USD"
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --ink:#0A0A0A;
+    --charcoal:#151515;
+    --card:#131313;
+    --line:#2A2A2A;
+    --white:#FAFAFA;
+    --grey:#8A8A8A;
+    --grey-dim:#5C5C5C;
+    --crimson:#A6192E;
+    --crimson-glow: rgba(166,25,46,0.35);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--ink);
+    color:var(--white);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  /* subtle film grain */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:2;
+    opacity:0.045;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .eyebrow{
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.28em;
+    font-size:16px;
+    color:var(--crimson);
+    font-weight:600;
+  }
+
+  h1,h2,h3{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    text-transform:uppercase;
+    line-height:0.95;
+    letter-spacing:0.01em;
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    min-height:92vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:32px 24px 64px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    top:-20%;
+    right:-15%;
+    width:70vw;
+    height:70vw;
+    max-width:900px;
+    max-height:900px;
+    background:radial-gradient(circle, var(--crimson-glow) 0%, transparent 68%);
+    opacity:0.5;
+    pointer-events:none;
+  }
+  .hero-inner{
+    position:relative;
+    z-index:1;
+    max-width:760px;
+  }
+  .hero .eyebrow{margin-bottom:18px; display:block;}
+  .hero h1{
+    font-size:clamp(42px, 9.5vw, 88px);
+    color:var(--white);
+    margin-bottom:22px;
+  }
+  .hero h1 span{color:var(--crimson);}
+  .hero p{
+    font-size:clamp(16px, 2.4vw, 19px);
+    color:var(--grey);
+    max-width:520px;
+    line-height:1.55;
+    font-weight:400;
+  }
+  .hero-meta{
+    margin-top:44px;
+    display:flex;
+    gap:32px;
+    flex-wrap:wrap;
+    font-family:'Oswald', sans-serif;
+    font-size:clamp(15px, 1.9vw, 19px);
+    letter-spacing:0.06em;
+    color:var(--white);
+    text-transform:uppercase;
+    font-weight:500;
+  }
+  .hero-meta strong{color:var(--crimson); font-weight:700; font-size:1.15em;}
+
+  .scroll-cue{
+    position:absolute;
+    bottom:28px;
+    left:24px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Oswald', sans-serif;
+    font-size:11px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--grey-dim);
+  }
+  .scroll-cue .bar{
+    width:1px;
+    height:34px;
+    background:linear-gradient(var(--crimson), transparent);
+    animation:scrollpulse 1.8s ease-in-out infinite;
+  }
+  @keyframes scrollpulse{
+    0%,100%{opacity:0.3;}
+    50%{opacity:1;}
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline-section{
+    position:relative;
+    max-width:920px;
+    margin:0 auto;
+    padding:100px 24px 60px;
+  }
+
+  .timeline-rail{
+    position:absolute;
+    top:100px;
+    bottom:60px;
+    left:calc(24px + 27px);
+    width:2px;
+    background:var(--line);
+  }
+  .timeline-rail-fill{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:0%;
+    background:linear-gradient(var(--crimson), #6e1220);
+    transition:height 0.15s linear;
+    box-shadow:0 0 14px var(--crimson-glow);
+  }
+
+  .stage{
+    position:relative;
+    padding-left:76px;
+    margin-bottom:88px;
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+  .stage.visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+  .stage:last-child{margin-bottom:0;}
+
+  .stage-marker{
+    position:absolute;
+    left:0;
+    top:2px;
+    width:56px;
+    height:56px;
+    border-radius:50%;
+    background:var(--card);
+    border:2px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Oswald', sans-serif;
+    font-size:10.5px;
+    font-weight:600;
+    letter-spacing:0.02em;
+    text-align:center;
+    color:var(--grey);
+    line-height:1.2;
+    z-index:1;
+    transition:border-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+  }
+  .stage.visible .stage-marker{
+    border-color:var(--crimson);
+    color:var(--white);
+    box-shadow:0 0 0 4px var(--crimson-glow);
+  }
+  .stage.milestone .stage-marker{
+    width:64px;
+    height:64px;
+    top:-4px;
+  }
+
+  .stage-tag{
+    font-family:'Oswald', sans-serif;
+    font-size:12px;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--crimson);
+    font-weight:600;
+    margin-bottom:10px;
+    display:block;
+  }
+
+  .stage h2{
+    font-size:clamp(26px, 4.2vw, 36px);
+    color:var(--white);
+    margin-bottom:14px;
+  }
+
+  .stage p{
+    color:var(--grey);
+    font-size:15.5px;
+    line-height:1.65;
+    max-width:520px;
+  }
+
+  .stage-detail{
+    margin-top:16px;
+    padding-left:16px;
+    border-left:2px solid var(--line);
+  }
+  .stage-detail p{
+    font-size:14px;
+    color:var(--grey-dim);
+    margin-bottom:6px;
+  }
+  .stage-detail p:last-child{margin-bottom:0;}
+  .stage-detail strong{color:var(--grey); font-weight:600;}
+
+  .stage.milestone{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:3px solid var(--crimson);
+    padding:28px 24px 30px 112px;
+    margin-left:-24px;
+    margin-right:-24px;
+    border-radius:2px;
+  }
+  .stage.milestone .stage-marker{left:24px;}
+
+  /* ===== CTA ===== */
+  .cta-section{
+    position:relative;
+    padding:100px 24px 90px;
+    text-align:center;
+    border-top:1px solid var(--line);
+    overflow:hidden;
+  }
+  .cta-section::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(circle at 50% 100%, var(--crimson-glow) 0%, transparent 60%);
+    opacity:0.4;
+    pointer-events:none;
+  }
+  .cta-inner{position:relative; z-index:1; max-width:560px; margin:0 auto;}
+  .cta-section .eyebrow{display:block; margin-bottom:16px;}
+  .cta-section h2{
+    font-size:clamp(32px, 7vw, 52px);
+    color:var(--white);
+    margin-bottom:16px;
+  }
+  .cta-section p{
+    color:var(--grey);
+    font-size:16px;
+    line-height:1.6;
+    margin-bottom:36px;
+  }
+  .cta-btn{
+    display:inline-block;
+    font-family:'Oswald', sans-serif;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    font-size:15px;
+    color:var(--ink);
+    background:var(--white);
+    padding:18px 40px;
+    border-radius:2px;
+    text-decoration:none;
+    transition:background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+    border:2px solid var(--white);
+  }
+  .cta-btn:hover{
+    background:var(--crimson);
+    border-color:var(--crimson);
+    color:var(--white);
+    transform:translateY(-2px);
+  }
+  .cta-foot{
+    margin-top:22px;
+    font-size:12px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--grey-dim);
+    font-family:'Oswald', sans-serif;
+  }
+
+  footer{
+    text-align:center;
+    padding:28px 24px 40px;
+    font-family:'Oswald', sans-serif;
+    font-size:11px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--grey-dim);
+  }
+
+  @media (max-width: 560px){
+    .timeline-rail{left:calc(24px + 22px);}
+    .stage{padding-left:64px;}
+    .stage-marker{width:46px; height:46px; font-size:9px;}
+    .stage.milestone .stage-marker{width:52px; height:52px;}
+    .stage.milestone{padding-left:88px; margin-left:-16px; margin-right:-16px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .stage{transition:none; opacity:1; transform:none;}
+    .scroll-cue .bar{animation:none;}
+    .timeline-rail-fill{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">Athlete For Life Project</span>
+    <h1>What Happens<br>When You <span>Commit</span></h1>
+    <p>No guesswork. No generic program pulled off the internet. Here's exactly what the next 12 weeks look like, step by step, from the day you say yes.</p>
+    <div class="hero-meta">
+      <span><strong>12</strong> weeks</span>
+      <span><strong>2</strong> retests</span>
+      <span><strong>1</strong> program that progresses with you</span>
+    </div>
+  </div>
+  <div class="scroll-cue"><div class="bar"></div>Scroll</div>
+</section>
+
+<section class="timeline-section">
+  <div class="timeline-rail"><div class="timeline-rail-fill" id="railFill"></div></div>
+
+  <div class="stage" data-stage>
+    <div class="stage-marker">DAY<br>0</div>
+    <span class="stage-tag">Commitment</span>
+    <h2>You say yes.</h2>
+    <p>You sign up for Athletic Re-Entry, or start with the standalone Comeback Test if you want a look before you leap.</p>
+    <div class="stage-detail">
+      <p><strong>What happens:</strong> Immediate welcome confirmation. You're locked in and the clock starts.</p>
+    </div>
+  </div>
+
+  <div class="stage milestone" data-stage>
+    <div class="stage-marker">DAY<br>1&ndash;2</div>
+    <span class="stage-tag">Onboarding: The Comeback Test</span>
+    <h2>We find out where you're at.</h2>
+    <p>Before a single rep gets programmed, I need the full picture: not just what you want, but what your body's actually been through and where it stands today.</p>
+    <div class="stage-detail">
+      <p><strong>Intake:</strong> training history, injury history, goals, schedule and equipment access.</p>
+      <p><strong>Baseline:</strong> the Comeback Test: agility, power, isometric strength, and aerobic capacity. This is the number everything else gets measured against.</p>
+      <p><strong>App access:</strong> your account is set up. This is where every program, message, and check-in lives from here forward.</p>
+    </div>
+  </div>
+
+  <div class="stage" data-stage>
+    <div class="stage-marker">WHILE<br>WE<br>BUILD</div>
+    <span class="stage-tag">Your Starter Workout</span>
+    <h2>You're never left waiting.</h2>
+    <p>While your individualized program is being built from your Comeback Test results, you're not sitting idle. You get a general workout to follow so training starts immediately.</p>
+  </div>
+
+  <div class="stage" data-stage>
+    <div class="stage-marker">WEEK<br>1&ndash;2</div>
+    <span class="stage-tag">Programming Begins</span>
+    <h2>Your program, not a template.</h2>
+    <p>Built directly from your baseline and your goals, and built to progress with you as you improve, not a static plan you repeat for 12 weeks. Every exercise in it earns its place; nothing goes in just because it's generally "a good exercise."</p>
+  </div>
+
+  <div class="stage" data-stage>
+    <div class="stage-marker">ONGOING</div>
+    <span class="stage-tag">Real-Time Coaching</span>
+    <h2>Coaching, not just a program.</h2>
+    <p>The plan adjusts to how you're actually responding, not a fixed script you follow blind for 12 weeks.</p>
+    <div class="stage-detail">
+      <p><strong>Biweekly calls:</strong> 20&ndash;25 minutes, every 2 weeks.</p>
+      <p><strong>Async check-ins:</strong> ongoing messaging and form feedback in the app.</p>
+      <p><strong>Live adjustments:</strong> movement gets corrected and re-tuned as we go.</p>
+    </div>
+  </div>
+
+  <div class="stage milestone" data-stage>
+    <div class="stage-marker">WEEK<br>6</div>
+    <span class="stage-tag">Retest 1</span>
+    <h2>Proof, not a feeling.</h2>
+    <p>Retested against your Week 1 baseline. The program gets adjusted based on what the numbers actually show.</p>
+  </div>
+
+  <div class="stage milestone" data-stage>
+    <div class="stage-marker">WEEK<br>12</div>
+    <span class="stage-tag">Retest 2 &amp; What's Next</span>
+    <h2>Where you started vs. where you are.</h2>
+    <p>A full retest against your original baseline, then we build the next 12 weeks: new goals, new benchmarks to chase, and deeper work on the mindset side. The work doesn't stop here. It levels up.</p>
+  </div>
+
+</section>
+
+<section class="cta-section">
+  <div class="cta-inner">
+    <span class="eyebrow">Athlete For Life Project</span>
+    <h2>Ready to Start?</h2>
+    <p>The athlete in you never left. It's just been waiting to be unleashed again.</p>
+    <a href="#" class="cta-btn">Book Your Comeback Test</a>
+    <div class="cta-foot">@athleteforlifeproject</div>
+  </div>
+</section>
+
+<footer>Athlete For Life Project &middot; The Comeback Test</footer>
+
+<script>
+  const stages = document.querySelectorAll('[data-stage]');
+  const railFill = document.getElementById('railFill');
+  const rail = document.querySelector('.timeline-rail');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.25 });
+
+  stages.forEach(s => io.observe(s));
+
+  function updateRail(){
+    if(reduceMotion) return;
+    const rect = rail.getBoundingClientRect();
+    const railTop = rect.top + window.scrollY;
+    const railHeight = rail.offsetHeight;
+    const viewportBottom = window.scrollY + window.innerHeight * 0.7;
+    let progress = (viewportBottom - railTop) / railHeight;
+    progress = Math.max(0, Math.min(1, progress));
+    railFill.style.height = (progress * 100) + '%';
+  }
+
+  if(reduceMotion){
+    railFill.style.height = '100%';
+  } else {
+    window.addEventListener('scroll', updateRail, { passive: true });
+    window.addEventListener('resize', updateRail);
+    updateRail();
+  }
+</script>
+
+</body>
+</html>
